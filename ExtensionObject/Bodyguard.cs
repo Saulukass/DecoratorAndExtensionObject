@@ -14,11 +14,9 @@ namespace ExtensionObject
             this.driver = driver;
             }
 
-        public void AddRisksToSalary()
+        public int GetSalaryIncludingRisks()
             {
-            int currentSalary = driver.GetSalary();
-            currentSalary *= 3;
-            driver.ChangeSalary(currentSalary);
+            return driver.GetSalary() * 3;
             }
 
         public void CheckSuroundings()

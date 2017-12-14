@@ -8,20 +8,27 @@ namespace Decorator
     {
     class Bodyguard : DriverDecorator
         {
+        private int risks;
         public Bodyguard(IDriver driver) : base(driver)
-            {}
+            {
+            risks = 0;
+            }
 
-        public void AddRisksToSalary()
+        public void CountRisksBasedOnSalary()
             {
             int currentSalary = GetSalary();
-            currentSalary *= 3;
-            ChangeSalary(currentSalary);
+            risks = currentSalary * 3;
             }
 
         public override void Drive()
             {
             Console.WriteLine("[Bodyguard] Check suroundings before moving.");
             base.Drive();
+            }
+
+        public override int GetSalary()
+            {
+            return base.GetSalary() + risks;
             }
         }
     }

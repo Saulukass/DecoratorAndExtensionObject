@@ -41,7 +41,9 @@ namespace ExtensionObject
 
         public IExtension GetExtension(string name)
             {
-            return extensions[name];
+            IExtension toReturn;
+            extensions.TryGetValue(name, out toReturn);
+            return toReturn;
             }
 
         public int GetSalary()

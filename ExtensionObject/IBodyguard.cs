@@ -8,7 +8,7 @@ namespace ExtensionObject
     {
     interface IBodyguard : IExtension
         {
-        void AddRisksToSalary();
+        int GetSalaryIncludingRisks();
         void CheckSuroundings();
         }
     }

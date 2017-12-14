@@ -30,27 +30,39 @@ namespace Decorator
             return baseDriver.GetSalary();
             }
 
-        public T GetRole<T>() where T : DriverDecorator
+        private T GetDecoratorInternal<T>() where T : DriverDecorator
             {
             if (this is T)
                 return (T)this;
 
-            if (!(this.baseDriver is DriverDecorator))
-                return null;
-
-            return (this.baseDriver as DriverDecorator).GetRole<T>();
+            return DriverDecorator.GetDecorator<T>(this.baseDriver);
             }
 
-        public IDriver RemoveRole<T>() where T : DriverDecorator
+        private IDriver RemoveDecoratorInternal<T>() where T : DriverDecorator
             {
             if (this is T)
                 return this.baseDriver;
 
-            if (!(this.baseDriver is DriverDecorator))
-                return this;
-
-            this.baseDriver = (this.baseDriver as DriverDecorator).RemoveRole<T>();
+            this.baseDriver = DriverDecorator.RemoveDecorator<T>(this.baseDriver);
             return this;
             }
+
+        static public T GetDecorator<T>(IDriver driver) where T : DriverDecorator
+            {
+            if (!(driver is DriverDecorator))
+                return null;
+
+            return (driver as DriverDecorator).GetDecoratorInternal<T>();
+            }
+
+        static public IDriver RemoveDecorator<T>(IDriver driver) where T : DriverDecorator
+            {
+            if (!(driver is DriverDecorator))
+                return driver;
+
+            return (driver as DriverDecorator).RemoveDecoratorInternal<T>();
+            }
+
+        // TODO pasiekti originalu objekta
         }
     }
