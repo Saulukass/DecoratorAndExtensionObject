@@ -30,6 +30,14 @@ namespace Decorator
             return baseDriver.GetSalary();
             }
 
+        protected IDriver GetUndecoratedDriver()
+            {
+            if (this.baseDriver is DriverDecorator)
+                return (this.baseDriver as DriverDecorator).GetUndecoratedDriver();
+
+            return this.baseDriver;
+            }
+
         private T GetDecoratorInternal<T>() where T : DriverDecorator
             {
             if (this is T)
@@ -62,7 +70,5 @@ namespace Decorator
 
             return (driver as DriverDecorator).RemoveDecoratorInternal<T>();
             }
-
-        // TODO pasiekti originalu objekta
         }
     }

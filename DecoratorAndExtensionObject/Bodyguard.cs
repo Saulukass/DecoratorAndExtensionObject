@@ -28,7 +28,7 @@ namespace Decorator
 
         public override int GetSalary()
             {
-            return base.GetSalary() + risks;
+            return GetUndecoratedDriver().GetSalary() + risks;
             }
         }
     }
